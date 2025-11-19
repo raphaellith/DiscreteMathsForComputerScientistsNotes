@@ -1,0 +1,187 @@
+\section{Introduction to groups}
+
+\subsection{What is a group?}
+
+Consider a nonempty set \(G\) and a binary operation \(* : G \times G \rightarrow G\). The pair \((G, *)\) is said to be a \textit{group} if and only if it has the following properties.
+%
+\begin{enumerate}
+    \item \textbf{Closure:} For any two elements \(x\) and \(y\) in \(G\), the value \(x * y\) must also be an element of \(G\).
+    \[\forall x, y \in G,\; x * y \in G\]
+
+    \item \textbf{Associativity:} If we want to repeatedly perform the operation \(*\) on three elements in \(G\), it doesn't matter where we put the brackets.
+    \[\forall x, y, z \in G,\; (x*y)*z = x*(y*z)\]
+
+    \item \textbf{Existence of identity element:} There is a unique \textit{identity element} \(\epsilon\) in \(G\) such that performing the operation \(*\) on \(x\) with \(\epsilon\) (in any order) should give us the value of \(x\) back.
+    %
+    \[\exists \epsilon \in G,\; \forall x \in G,\; x * \epsilon = \epsilon * x = x\]
+    %
+    The identity element is sometimes called the \textit{neutral element}, or simply the \textit{identity}.
+
+    \item \textbf{Invertibility (i.e. existence of inverse for all elements):} For any element \(x\) in \(G\), there exists a corresponding unique \textit{inverse} element \(x^{-1}\) in \(G\) such that performing the operation \(*\) on \(x\) with \(x^{-1}\) (in any order) produces the identity element.
+    %
+    \[\forall x \in G,\; \exists x^{-1} \in G,\; x * x^{-1} = x^{-1} * x = \epsilon\]
+    %
+    Note that \(x^{-1}\) refers merely to the inverse of \(x\), and does not necessarily denote the reciprocal of \(x\).
+\end{enumerate}
+
+The \textit{order} of a group \((G, *)\) is defined as the cardinality of the set \(G\).
+
+
+\subsection{Commutative groups}
+
+Occasionally, a group \((G, *)\) might happen to satisfy a fifth, additional condition --- commutativity. This means that if we want to perform the operation \(*\) on two elements \(x\) and \(y\), it doesn't matter what order we put the two elements in.
+%
+\[\forall x, y \in G,\; x * y = y * x\]
+%
+This kind of group is called a \textit{commutative group}.
+
+
+\subsection{Additive groups}
+
+The operation of a group can be anything as long as it's binary; but we also have special names for groups with specific operations. For example, a group with addition as its operation is known as an \textit{additive group}.
+
+\((\mathbb{Z}, +)\) is an example of an additive group. It satisfies closure (the sum of any two integers is also an integer) and associativity (\((x + y) + z = x + (y + z)\)); it has an identity element (\(\epsilon = 0\)), and every element \(x\) has a corresponding unique inverse \(x^{-1} = -x\) where \(x + (-x) = 0\).
+
+As addition is commutative, this is also a commutative group.
+
+The group \((\mathbb{Z}, +)\) has the following property:
+%
+\begin{quote}
+    For any two integers \(a\) and \(b\), the equation \(a + z = b\) has a unique solution.
+    %
+    \begin{proof}
+    We start by showing the existence of such a solution. By setting \(z = -a + b\), we have:
+    \begin{align*}
+        a + z &= a + ((-a) + b)\\
+        &= (a + (-a)) + b \tag{associativity}\\
+        &= 0 + b\\
+        &= b
+    \end{align*}
+    %
+    which implies that \(z = -a + b\) is a solution to the aforementioned equation.
+
+    To show that this solution is unique, suppose \(z_1\) and \(z_2\) are both integers that satisfy the equation.
+    %
+    \[
+    \begin{cases}
+        a + z_1 = b\\
+        a + z_2 = b
+    \end{cases}
+    \]
+    %
+    We then add the inverse of \(a\), or \(-a\), to both sides of each equation.
+    %
+    \[
+    \begin{cases}
+        (-a) + a + z_1 = -a + b\\
+        (-a) + a + z_2 = -a + b
+    \end{cases}
+    \]
+    %
+    Since \((-a)+a = 0\), this gives us the following set of equations:
+    %
+    \[
+    \begin{cases}
+        z_1 = -a + b\\
+        z_2 = -a + b
+    \end{cases}
+    \]
+    %
+    which gives \(z_1 = -a+b = z_2\). This means that \(z = -a+b\) is indeed a unique solution to the equation.
+    \end{proof}
+\end{quote}
+
+This property holds for all other additive groups as well.
+
+Another additive group is the group formed by the set of remainders \(G_m = \{0, 1, 2, \cdots, m-2, m-1\}\) with respect to addition modulo \(m\). We can once again check that it satisfies closure and associativity, with the existence of an identity element (0) and an inverse for every element in \(G_m\).
+
+We note that \((\mathbb{N}, +)\) is \textit{not} a group as not all elements have inverses. For instance, for the element 2, there is no \(n \in \mathbb{N}\) that satisfies \(n + 2 = \epsilon = 0\).
+
+
+\subsection{Multiplicative groups}
+
+Similar to what we saw above, a group with multiplication as its operation is known as an \textit{multiplicative group}.
+
+An example of a multiplicative group is \((\mathbb{R}^{+}, \times)\). Again, we can easily verify that it satisfies all four prerequisites for a group --- the identity element is 1, and each element \(x \in \mathbb{R}^+\) has \(x^{-1} = 1/x\) as its inverse --- and that it has the bonus property of commutativity. Moreover, we can prove the following theorem, similar to the previous one we proved for additive groups.
+%
+\begin{quote}
+    For any two positive real numbers \(a\) and \(b\), the equation \(a \times z = b\) has a unique solution.
+    %
+    \begin{proof}
+    We start by showing the existence of such a solution. By setting \(z = 1/a \times b\), we have:
+    \begin{align*}
+        a \times z &= a \times (1/a \times b)\\
+        &= (a \times 1/a) \times b \tag{associativity}\\
+        &= 1 \times b\\
+        &= b
+    \end{align*}
+    %
+    which means \(z = 1/a + b\) is a solution to the equation.
+
+    To show that this solution is unique, suppose \(z_1\) and \(z_2\) are both positive real numbers that satisfy the equation.
+    %
+    \[
+    \begin{cases}
+        a \times z_1 = b\\
+        a \times z_2 = b
+    \end{cases}
+    \]
+    %
+    We then multiply the inverse of \(a\), or \(1/a\), on both sides of each equation.
+    %
+    \[
+    \begin{cases}
+        1/a \times a \times z_1 = 1/a \times b\\
+        1/a \times a \times z_2 = 1/a \times b
+    \end{cases}
+    \]
+    %
+    Since \(1/a \times a = 1\), this gives us the following set of equations:
+    %
+    \[
+    \begin{cases}
+        z_1 = 1/a \times b\\
+        z_2 = 1/a \times b
+    \end{cases}
+    \]
+    %
+    which gives \(z_1 = 1/a \times b = z_2\). This means that \(z = 1/a \times b\) is indeed a unique solution to the equation.
+    \end{proof}
+\end{quote}
+
+This property holds for all other multiplicative groups too.
+
+As a sidenote, the group formed by the set of permutations of degree \(n\) with respect to multiplication (i.e. composition) is also a multiplicative group.
+
+
+\subsection{Subgroups}
+
+Given a group \((G, *)\), if there exists a subset \(H \subseteq G\) such that \((H, *)\) too fulfills closure, has a neutral element and has invertibility, then \((H, *)\) is said to be a \textit{subgroup} of \((G, *)\).
+
+Note that
+\begin{itemize}
+    \item Associativity is not listed above because if the operation \(*\) is associative for all elements of \(G\), it must also be associative for all elements of \(H\).
+    \item Although the term ``subgroup'' refers to \((H, *)\), in casual usage, mathematicians may sometimes use the word ``subgroup'' when only referring to the subset \(H\).
+\end{itemize}
+
+For any group \((G, *)\), let \(a\) be an element of \(G\). We can use \(a\) to generate a subgroup \((H, *)\) like so:
+%
+\[H = \{a^k \setvert k \in \mathbb{Z}\} = \{\cdots, a^{-2}, a^{-1}, a^0, a^1, a^2, \cdots\}\]
+%
+where
+\begin{itemize}
+    \item \(a^{-k} = \underbrace{a^{-1} * a^{-1} * \cdots * a^{-1}}_{\text{\(k\) times}}\);
+    \item \(a^{0} = \epsilon\); and
+    \item \(a^{k} = \underbrace{a * a * \cdots * a}_{\text{\(k\) times}}\).
+\end{itemize}
+%
+Such a subgroup is called a \textit{cyclic subgroup}.
+
+As an example, consider the multiplicative group \((\mathbb{C}, \times)\). A cyclic subgroup of this group can be formed with the set \(\{i, i^2, i^3, i^4\} = \{i, -1, -i, 1\}\) as it satisfies closure, has the neutral element \(1\) and has inverses for each element.
+
+
+\subsection{Order of an element}
+
+Given a group \((G, *)\), we define the \textit{order} of an element \(a \in G\) as the smallest positive integer \(k\) such that \(a^k = \epsilon\), where \(\epsilon\) is the identity element.
+
+This is not to be confused with the order of a group, which refers to the cardinality of \(G\).

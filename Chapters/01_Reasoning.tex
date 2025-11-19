@@ -1,0 +1,292 @@
+\section{Introduction to mathematical reasoning}
+
+Many mathematical properties can be formulated in plain English, but may look ambiguous or unclear to the uninitiated. It is thus essential for us to formulate them in the precise language of logic instead. Before we dive into this methodical approach though, we must first introduce the notion of a set.
+
+
+\subsection{What is a set?}
+
+A \textit{set} is a collection of different things. It can be thought of as a bag containing a number of different objects. Each object is called an \textit{element} of the set. A set \(S\) containing elements \(a\), \(b\) and \(c\) is denoted as \(S = \{a, b, c\}\). A set has no structure and no order, meaning that \(\{a, b, c\} = \{c, a, b\} = \{c, b, a\}\).
+
+If \(d\) is an element of \(S\), we can denote this by \(d \in S\).
+
+Also, note that:
+%
+\begin{itemize}
+    \item \(\mathbb{N}\) refers to the set of natural numbers. \[0, 1, 2, 3, \cdots\]
+    \item \(\mathbb{Z}\) refers to the set of integers: \[\cdots -3, -2, -1, 0, 1, 2, 3, \cdots\]
+    \item \(\mathbb{R}\) refers to the set of real numbers.
+\end{itemize}
+
+
+\subsection{Conjunction, disjunction and negation}
+
+Now that we know what is a set is, let us look at a few operators commonly used in mathematical logic:
+
+\begin{itemize}
+    \item The binary connective AND represents a \textit{conjunction} and is denoted with the symbol \(\land\). The statement \(P \land Q\) is true when both \(P\) and \(Q\) are true.
+    \item The binary connective OR represents a \textit{disjunction} and is denoted with the symbol \(\lor\). The statement \(P \lor Q\) is true when at least one of \(P\) and \(Q\) are true.
+    \item The unary connective NOT represents a \textit{negation} and is denoted with the symbol \(\neg\). The statement \(\neg P\) is true when \(P\) is false.
+\end{itemize}
+
+The truth tables for \(P\land Q\) and \(P \lor Q\) are shown in tables \ref{tab:Ch1-truth-table-and} and \ref{tab:Ch1-truth-table-or} respectively.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \(P\) is true & \(P\) is false \\
+        \hline
+        \(Q\) is true & \TruthTableTrue & \TruthTableFalse\\
+        \hline
+        \(Q\) is false & \TruthTableFalse & \TruthTableFalse\\
+        \hline
+    \end{tabular}
+    \caption{The truth table for \(P\land Q\).}
+    \label{tab:Ch1-truth-table-and}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \(P\) is true & \(P\) is false \\
+        \hline
+        \(Q\) is true & \TruthTableTrue & \TruthTableTrue\\
+        \hline
+        \(Q\) is false & \TruthTableTrue & \TruthTableFalse\\
+        \hline
+    \end{tabular}
+    \caption{The truth table for \(P \lor Q\). Note that OR is \textit{not} exclusive here.}
+    \label{tab:Ch1-truth-table-or}
+\end{table}
+
+
+\subsection{De Morgan's Laws: Negating conjunctions and disjunctions}
+
+To negate a conjunction or disjunction, we have to ask ourselves: ``In what cases is that conjunction or disjunction false?''
+
+This gives us the following set of relationships, known as De Morgan's Laws or as the Duality Principle.
+%
+\begin{align*}
+    \neg (A \land B) &= \neg A \lor \neg B\\
+    \neg (A \lor B) &= \neg A \land \neg B
+\end{align*}
+
+For example, consider the following statements:
+%
+\begin{itemize}
+    \item The weather is cold and rainy.
+    \item \(f(x) = 0\) or \(g(x) = 0\).
+\end{itemize}
+%
+Their respective negations are as follows:
+%
+\begin{itemize}
+    \item The weather is not cold or not rainy.
+    \item \(f(x) \neq 0\) and \(g(x) \neq 0\).
+\end{itemize}
+
+
+\subsection{Implications and their negations}
+
+The binary connective IF... THEN represents an \textit{implication} and is denoted with the symbol \(\Rightarrow\). If \(P \Rightarrow Q\), we can describe this relationship in plain English as:
+\begin{itemize}
+    \item \(P\) implies \(Q\).
+    \item Whenever \(P\) is true, \(Q\) must be true.
+    \item \(P\) is a sufficient condition for \(Q\).
+    \item \(Q\) is a necessary condition for \(P\).
+\end{itemize}
+
+Given an implication \(P \Rightarrow Q\), its \textit{converse} is defined as the statement \(Q \Rightarrow P\). An implication is not always equivalent to its converse.
+
+If we look at the truth table of this connective (table \ref{tab:Ch1-truth-table-if-then}), we may notice that the implication is much more subtle than it might seem at first glance.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \(P\) is true & \(P\) is false \\
+        \hline
+        \(Q\) is true & \TruthTableTrue & \TruthTableTrue\\
+        \hline
+        \(Q\) is false & \TruthTableFalse & \TruthTableTrue\\
+        \hline
+    \end{tabular}
+    \caption{The truth table for \(P \Rightarrow Q\).}
+    \label{tab:Ch1-truth-table-if-then}
+\end{table}
+
+The first column is relatively straightforward --- when \(P\) is true, \(Q\) must be true too. The second column, however, is not as intuitive: when \(P\) is false, \(Q\) can be either true or false. This is because the implication \(P \Rightarrow Q\) makes no claims about when \(P\) is false. (This subtlety is often the source of many misunderstandings; for more, see the \href{https://en.wikipedia.org/wiki/Wason_selection_task}{Wikipedia article on the Wason selection task}.)
+
+It might be useful to remember that an implication is false in one scenario only (when \(P\) is true and \(Q\) is false).
+
+Further examination of the truth table reveals that the implication \(P \Rightarrow Q\) can in fact be rewritten as a disjunction:
+%
+\[P \Rightarrow Q = \neg P \lor Q\]
+%
+This allows us to easily negate implications:
+%
+\[\neg (P \Rightarrow Q) = P \land \neg Q\]
+%
+We can verify this negation by checking its truth table.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \(P\) is true & \(P\) is false \\
+        \hline
+        \(Q\) is true & \TruthTableFalse & \TruthTableFalse\\
+        \hline
+        \(Q\) is false & \TruthTableTrue & \TruthTableFalse\\
+        \hline
+    \end{tabular}
+    \caption{The truth table for \(\neg (P \Rightarrow Q) = P \land \neg Q\).}
+    \label{tab:Ch1-truth-table-negated-implication}
+\end{table}
+
+As an example, the statement ``if \(n\) is even, then \(P(n) = 0\)'' can be negated into ``\(n\) is even and \(P(n) \neq 0\)''.
+
+
+
+\subsection{Contraposition}
+
+By rewriting an implication as a disjunction, we can show that \(P \Rightarrow Q\) is equivalent to \(\neg Q \Rightarrow \neg P\):
+%
+\begin{align*}
+    P \Rightarrow Q &= \neg P \lor Q\\
+    &= Q \lor \neg P\\
+    &= \neg (\neg Q) \lor \neg P\\
+    &= \neg Q \Rightarrow \neg P
+\end{align*}
+%
+Here, \(\neg Q \Rightarrow \neg P\) is known as the \textit{contrapositive} form. Intuitively this makes sense because if we don’t have \(Q\), we cannot have \(P\).
+
+
+\subsection{Equivalence}
+
+So far we've been using equal signs to denote that two statements are equal. In mathematical logic, this is often replaced by the binary connective \(\Leftrightarrow\), which represents \textit{equivalence}. Two statements \(P\) and \(Q\) are said to be equal when their properties coincide exactly, i.e. \(P\) implies \(Q\) and \(Q\) implies \(P\).
+
+Given an equivalence \(P \Leftrightarrow Q\), we can describe this in plain English as:
+\begin{itemize}
+    \item \(P\) is equivalent to \(Q\).
+    \item \(P\) if and only if \(Q\). (The phrase ``if and only if'' is usually abbreviated to ``iff''.)
+\end{itemize}
+
+
+\subsection{Quantifiers and their negations}
+
+\textit{Quantifiers} are logical connectives that allow us to reason about variables.
+
+One example is the \textit{universal quantifier} ``for all'', which is denoted as \(\forall\). Given a proposition \(P(x)\) involving \(x\), we can write:
+%
+\begin{itemize}
+    \item For all \(x\), \(P(x)\)
+    \item \(\forall x, P(x)\)
+\end{itemize}
+%
+We can also specify that \(x\) must be an element of a certain set \(S\):
+%
+\begin{itemize}
+    \item For all \(x\) in \(S\), \(P(x)\)
+    \item \(\forall x \in S,\; P(x)\)
+    \item \(\forall x,\; x \in S \Rightarrow P(x)\)
+\end{itemize}
+%
+We can write this in mathematical logic as \(P(s_1) \land P(s_2) \land \cdots \land P(s_n)\), where \(s_1, s_2, \cdots, s_n\) are elements of \(S\).
+
+Another example of a quantifier is the \textit{existential quantifier} ``there exists'', denoted as \(\exists\). Given a proposition \(P(x)\) involving \(x\), we can write:
+%
+\begin{itemize}
+    \item There exists \(x\) such that \(P(x)\)
+    \item \(\exists x, P(x)\)
+\end{itemize}
+%
+Again we can also specify that \(x\) must be an element of a set \(S\):
+%
+\begin{itemize}
+    \item There exists \(x\) in \(S\) such that \(P(x)\)
+    \item \(\exists x \in S,\; P(x)\)
+    \item \(\exists x,\; x \in S \land P(x)\)
+\end{itemize}
+%
+This can be written in mathematical logic as \(P(s_1) \lor P(s_2) \lor \cdots \lor P(s_n)\), where \(s_1, s_2, \cdots, s_n\) are elements of \(S\).
+
+To negate a quantifier, we once again ask ourselves the question: In what cases is the quantifier false? This gives the following, which are in fact equivalent to De Morgan's Laws.
+%
+\begin{itemize}
+    \item \(\neg(\forall x, P(x)) = \exists x, \neg P(x)\)
+    \item \(\neg(\exists x, P(x)) = \forall x, \neg P(x)\)
+\end{itemize}
+
+Lastly, we note the following remarks:
+%
+\begin{itemize}
+    \item It is possible to quantify over several variables. We write \(\forall x, y\) as a shortcut for \(\forall x, \forall y\).
+
+    \item When a statement consists of multiple quantifiers, their order matters. The statement \(\forall x, \exists y, P(x, y)\) is \textit{not} equivalent to \(\exists y, \forall x, P(x, y)\). To illustrate this we can consider the statements \(\forall x \in \mathbb{R}, \exists y \in \mathbb{R}, x < y\) and \(\exists y \in \mathbb{R}, \forall x \in \mathbb{R}, x < y\). These two statements are not equivalent: the former is true but the latter is false.
+    
+    \item For any statements \(P(x)\) and \(Q(x)\), we have
+    %
+    \begin{align*}
+        \exists x, (P(x) \lor Q(x)) &\Leftrightarrow (\exists x, P(x)) \lor (\exists x, Q(x))\\
+        \forall x, (P(x) \land Q(x)) &\Leftrightarrow (\forall x, P(x)) \land (\forall x, Q(x))
+    \end{align*}
+    %
+    However, in general,
+    %
+    \begin{align*}
+        \exists x, (P(x) \land Q(x)) &\not\Leftrightarrow (\exists x, P(x)) \land (\exists x, Q(x))\\
+        \forall x, (P(x) \lor Q(x)) &\not\Leftrightarrow (\forall x, P(x)) \lor (\forall x, Q(x))
+    \end{align*}
+
+    \item Let \(P\) be a statement that does not involve \(x\) whatsoever. Then:
+    %
+    \begin{align*}
+        \exists x, (P \lor Q(x)) &\Leftrightarrow P \lor \exists x, Q(x)\\
+        \exists x, (P \land Q(x)) &\Leftrightarrow P \land \exists x, Q(x)\\
+        \forall x, (P \lor Q(x)) &\Leftrightarrow P \lor \forall x, Q(x)\\
+        \forall x, (P \land Q(x)) &\Leftrightarrow P \land \forall x, Q(x)\\
+        \forall x, (P \Rightarrow Q(x)) &\Leftrightarrow P \Rightarrow \forall x, Q(x)\\
+        \forall x, (Q(x) \Rightarrow P) &\Leftrightarrow (\exists x, Q(x)) \Rightarrow P
+    \end{align*}
+\end{itemize}
+
+
+\subsection{Proving and disproving mathematical propositions}
+
+\begin{itemize}
+    \item To prove \(P \land Q\), we must prove both \(P\) and \(Q\). To disprove it, we must prove \(\neg (P \land Q) = \neg P \lor \neg Q\) (by De Morgan's Laws).
+    
+    \item To prove \(P \lor Q\), we must prove \(P\) or \(Q\), even though we might not necessarily know which one is true. To disprove it, we must prove \(\neg (P \lor Q) = \neg P \land \neg Q\) (by De Morgan's Laws).
+    
+    \item To prove \(P \Rightarrow Q\), we begin by assuming \(P\) is true and then show that \(Q\) is also true. To disprove it, we must find a \textit{counterexample} where \(P\) is true but \(Q\) is false.
+    
+    \item To prove \(P \Leftrightarrow Q\), we must prove \(P \Rightarrow Q \land Q \Rightarrow P\). Both implications must be proved. To disprove it, we must prove that either \(P \Rightarrow Q\) is false, or \(Q \Rightarrow P\), or both.
+    
+    \item To prove \(\forall x \in S, P(x)\), we begin our proof with the line ``let \(x \in S\)'', without specifying the value of \(x\). We then prove the property \(P(x)\). To disprove it, we must find a counterexample where \(x\) is an element of \(S\) but does not satisfy the property \(P(x)\).
+
+    \item To prove \(\exists x \in S, P(x)\), we must find an example of \(x\) where \(x\) is an element of \(S\) and satisifies the property \(P(x)\). To disprove it, we must show that for all \(x \in S\), the statement \(P(x)\) is false.
+\end{itemize}
+
+
+
+\subsection{Free and bound variables}
+
+Variables can be more complicated than they appear to be. Consider the following statement.
+%
+\[P({\color{MidnightBlue} x }) = (Q({\color{MidnightBlue} x }) \Rightarrow \forall {\color{BrickRed} x }, Q({\color{BrickRed} x }))\]
+%
+Note that the blue instances of \(x\) can be replaced by any value (e.g. 4, 6.1, etc.) and the statement would still be understandable. These are known as \textit{free} variables. On the contrary, the red instances are ``untouchable'' and cannot be replaced; they can only be renamed. They are known as \textit{bound} variables.
+
+Once you understand the different between free and bound variables, you'll notice them everywhere:
+\begin{itemize}
+    \item In summation:
+    \[\sum_{{\color{BrickRed}i}=1}^{{\color{MidnightBlue}n}} {\color{BrickRed}i}^2\]
+
+    \item In integral calculus:
+    \[\int_{a}^{\color{MidnightBlue}b} \sin{(2 {\color{BrickRed} t} +1)}\; d {\color{BrickRed} t}\]
+
+    \item In programming, specifically the use of local and global variables.
+\end{itemize}
+

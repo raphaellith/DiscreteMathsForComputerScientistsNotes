@@ -1,0 +1,298 @@
+\section{Euclidean algorithm and its applications in groups}
+
+\subsection{Multiplicative group of integers modulo \(m\)}
+
+Here we take a look at a special kind of multiplicative group. For any modulus \(m\), we define the \textit{multiplicative group of integers modulo \(m\)} as the group formed by the set
+%
+\[G^{\times}_m = \{a \setvert (1 \leq a < m) \wedge (\gcd{(a, m)} = 1)\}\]
+%
+with respect to multiplication \(\bmod{\;m}\).
+
+Put plainly, the set \(G^{\times}_m\) is simply the set of all integers inclusively between \(1\) and \((m - 1)\) that are coprime with \(m\). For example, the multiplicative group of integers modulo \(15\) is \(G^{\times}_{15} = \{1, 2, 4, 7, 8, 11, 13, 14\}\).
+
+
+\subsection{Euler's totient function}
+
+For any positive integer \(m\), we define \textit{Euler's totient function} \(\phi(m)\) as the cardinality of the set \(G^{\times}_m\), i.e.
+%
+\[\phi(m) = \abs{G^{\times}_m}\text{.}\]
+%
+This allows us to say something like \(\phi(15) = 8\), because between 1 and 15 (inclusive), there are 8 integers that are coprime with 15.
+
+% For any prime \(p\), we have \(\gcd{(p, n)} = 1\) for any positive integer \(n\). Hence, \(\phi(p) = p-1\).
+
+Let us investigate the properties of this function. In particular, we want to answer these two questions:
+%
+\begin{enumerate}
+    \item If a certain number \(p\) is prime, what does that tell us about \(\phi(p)\)?
+
+    \item Now suppose we have two primes \(p\) and \(q\). What does that tell us about \(\phi(pq)\)?
+\end{enumerate}
+
+The first question is easy. Since \(p\) is prime, we have \(G^\times_p = \{1, 2, 3, \cdots, p-2, p-1\}\), which gives us \(\phi(p) = p-1\).
+
+Answering the second question requires a change in perspective. Instead of thinking ``how many numbers are in \(G^\times_{pq}\)'', it might be more helpful to think ``how many numbers are \textit{not} in \(G^\times_{pq}\)''. There are a total of \(pq\) integers from 1 to \(pq\), and among these integers,
+%
+\begin{itemize}
+    \item There are \(p\) multiples of \(q\):
+    %
+    \[q,\; 2q,\; 3q,\; \cdots,\; pq\]
+    %
+    Each of these multiples shares a common divisor of \(q\) with \(pq\), and thus will not appear in the set \(G^\times_{pq}\).
+
+    \item Similarly, there are \(q\) multiples of \(p\):
+    %
+    \[p,\; 2p,\; 3p,\; \cdots,\; pq\]
+    %
+    Each of these multiples shares a common divisor of \(p\) with \(pq\), and therefore will not appear in the set \(G^\times_{pq}\) either.
+\end{itemize}
+%
+Since both \(p\) and \(q\) are prime, these are the only integers from 1 to \(pq\) that do not appear in \(G^\times_{pq}\). Taking into account the fact that \(pq\) is double-counted in the two cases above, we can calculate \(\phi(pq) = \abs{G^\times_{pq}}\) as follows.
+%
+\begin{align*}
+    \phi(pq) &= \abs{G^\times_{pq}}\\
+    &= (\text{\# of integers from \(1\) to \(pq\)}) - (\text{\# of non-coprime integers from \(1\) to \(pq\)})\\
+    &= pq - ((\text{\# of multiples of \(q\)}) + (\text{\# of multiples of \(p\)}) - 1)\\
+    &= pq - (p + q - 1)\\
+    &= pq - p - q + 1\\
+    &= (p-1)(q-1)\\
+    &= \phi(p)\cdot \phi(q)
+\end{align*}
+
+This conclusion that \(\phi(pq) = \phi(p)\cdot \phi(q) = (p-1)(q-1)\) can be very useful when calculating \(\phi(pq)\) for relatively large values of \(p\) and \(q\). For example, to compute \(\phi(143)\), we can break 143 down into two primes, giving us
+%
+\begin{align*}
+    \phi(143) &= \phi(11 \times 13)\\
+    &= \phi(11) \times \phi(13)\\
+    &= (11-1)(13-1)\\
+    &= 120\text{.}
+\end{align*}
+
+
+\subsection{But is it really a group?}
+
+To verify that the set \(G^{\times}_m\) indeed forms a group with respect to multiplication \(\pmod{m}\), we must check if it satisfies the four criteria outlined in the previous section.
+%
+\begin{itemize}
+    \item \textbf{Closure.} Since \((\gcd(a, m) = 1) \wedge (\gcd(b, m) = 1) \Rightarrow \gcd(a\times b, m) = 1\), this group satisfies closure.
+    \item \textbf{Associativity.} Multiplication is associative.
+    \item \textbf{Existence of identity element}. For any element \(a \in G^{\times}_{m}\), we have \(a \cdot 1 = 1 \cdot a = a\), so \(1\) is the identity element for this group.
+    \item \textbf{Existence of inverse for all elements.} For any \(a \in G^{\times}_m\) we can find some \(a^{-1}\) from \(G^{\times}_m\) such that \(a \times a^{-1} = 1 \pmod{m}\). (Or can we?)
+\end{itemize}
+%
+The last criterion, invertibility, is slightly more difficult to prove. To show that \((G^{\times}_m, \times)\) fulfils this condition, we will first have to introduce the Euclidean algorithm.
+
+
+\subsection{Euclidean algorithm}
+
+Given two integers \(a\) and \(b\) (where \(a > b\) without loss of generality), the Euclidean algorithm (or Euclid's algorithm) can be used to compute their greatest common divisor \(\gcd{(a, b)}\).
+
+It's best to illustrate the algorithm with an example. Suppose we want to evaluate the greatest common divisor between the numbers 600 and 11312. To do this, we divide the larger number by the smaller one to get a quotient and a remainder.
+
+\begin{tabular}{c|c}
+    \parbox{0.5\textwidth}{\centering
+        \(11312 = 18 \times 600 + 512\)
+    }
+    &
+    \parbox{0.5\textwidth}{\centering
+        \(a = 18 \times b + r_1\)
+    }
+\end{tabular}
+
+Ignoring the quotient, we take the two numbers on the RHS (600 and 512) and perform integer division on them again.
+
+\begin{tabular}{c|c}
+    \parbox{0.5\textwidth}{\centering
+        \(600 = 1 \times 512 + 88\)
+    }
+    &
+    \parbox{0.5\textwidth}{\centering
+        \(b = 1 \times r_1 + r_2\)
+    }
+\end{tabular}
+
+We repeat this process until we get a remainder of 0.
+
+\begin{tabular}{c|c}
+    \parbox{0.5\textwidth}{\centering
+        \begin{align*}
+            512 &= 5 \times 88 + 72\\
+            88 &= 1 \times 72 + 16\\
+            72 &= 4 \times 16 + 8\\
+            16 &= 2 \times 8 + 0
+        \end{align*}
+    }
+    &
+    \parbox{0.5\textwidth}{\centering
+        \begin{align*}
+            r_1 &= 5 \times r_2 + r_3\\
+            r_2 &= 1 \times r_3 + r_4\\
+            r_3 &= 4 \times r_4 + r_5\\
+            r_4 &= 2 \times r_5 + 0
+        \end{align*}
+    }
+\end{tabular}
+
+The GCD of the two original numbers is the last nonzero remainder obtained, which in this case is \(r_5 = 8\).
+
+As another example, here is a demonstration of the Euclidean algorithm with the numbers \(a = 408\) and \(b = 126\).
+
+\begin{tabular}{c|c}
+    \parbox{0.5\textwidth}{\centering
+        \begin{align*}
+            408 &= 3 \times 126 + 30\\
+            126 &= 4 \times 30 + 6\\
+            30 &= 5 \times 6 + 0
+        \end{align*}
+    }
+    &
+    \parbox{0.5\textwidth}{\centering
+        \begin{align*}
+            a &= 3 \times b + r_1\\
+            b &= 4 \times r_1 + r_2\\
+            r_1 &= 5 \times r_2 + 0
+        \end{align*}
+    }
+\end{tabular}
+
+The result here is \(\gcd{(408, 126)} = r_2 = 6\).
+
+
+\subsection{Expressing \(\gcd{(a, b)}\) as a linear combination of \(a\) and \(b\)}
+
+For any integers \(a\) and \(b\), we can express \(\gcd{(a, b)}\) as a linear combination of \(a\) and \(b\). In other words, there exist integers \(k_1\) and \(k_2\) such that
+%
+\[\gcd{(a, b)} = k_1 a + k_2 b\text{.}\]
+
+Again we illustrate this with an example. Consider the integers \(a = 1870\) and \(b = 242\). We can calculate their greatest common divisor via the Euclidean algorithm.
+
+\begin{tabular}{c|c}
+    \parbox{0.5\textwidth}{\centering
+        \begin{align*}
+            1870 &= 7 \times 242 + 176\\
+            242 &= 1 \times 176 + 66\\
+            176 &= 2 \times 66 + 44\\
+            66 &= 1 \times 44 + 22\\
+            44 &= 2 \times 22 + 0
+        \end{align*}
+    }
+    &
+    \parbox{0.5\textwidth}{\centering
+        \begin{align}
+            a &= 7 \times b + r_1\label{eq:Ch8-1}\\
+            b &= 1 \times r_1 + r_2\label{eq:Ch8-2}\\
+            r_1 &= 2 \times r_2 + r_3\label{eq:Ch8-3}\\
+            r_2 &= 1 \times r_3 + r_4\label{eq:Ch8-4}\\
+            r_3 &= 2 \times r_4 + 0\notag
+        \end{align}
+    }
+\end{tabular}
+
+From this we see that the two numbers share the greatest common divisor of \(r_4 = 22\), as shown in the second last equation above. In fact, starting backwards from equation \eqref{eq:Ch8-4}, it is possible to \textit{collect} \(k_1\) and \(k_2\) in a bottom up manner as demonstrated below:
+%
+\begin{align*}
+    22 = r_4 &= r_2 - r_3 \tag{from \eqref{eq:Ch8-4}}\\
+    &= r_2 - (r_1 - 2r_2) \tag{from \eqref{eq:Ch8-3}}\\
+    &= 3r_2 - r_1 \\
+    &= 3(b - r_1) - r_1 \tag{from \eqref{eq:Ch8-2}}\\
+    &= 3b - 4r_1 \\
+    &= 3b - 4(a - 7b) \tag{from \eqref{eq:Ch8-1}}\\
+    &= -4a + 31b
+\end{align*}
+%
+which gives us \(k_1 = -4\) and \(k_2 = 31\). Note that in each step we aim to eliminate the ``bottommost'' remainder with the greatest subscript. Those more experienced with this process may opt to use the actual numbers as opposed to symbols:
+%
+\begin{align*}
+    22 = &= 66 - 44 \tag{from \eqref{eq:Ch8-4}}\\
+    &= 66 - (176 - 2\times 66) \tag{from \eqref{eq:Ch8-3}}\\
+    &= 3\times 66 - 176 \\
+    &= 3\times(242 - 176) - 176 \tag{from \eqref{eq:Ch8-2}}\\
+    &= 3\times 242 - 4\times 176\\
+    &= 3\times 242 - 4\times(1870 - 7\times 242) \tag{from \eqref{eq:Ch8-1}}\\
+    &= -4\times 1870 + 31\times 242
+\end{align*}
+
+
+\subsection{Proving invertibility for multiplicative group of integers modulo \(n\)}
+
+But how does the Euclidean algorithm help us to show the invertibility for multiplicative group of integers modulo \(n\)?
+
+We can prove this as follows.
+%
+\begin{quote}
+    For any \(a \in G^{\times}_m\) we want to find some \(x = a^{-1} \in G^{\times}_m\) such that \(a \times x = 1 \pmod{m}\). By definition of \(G^{\times}_m\), the greatest common divisor between \(a\) and \(m\) must be 1, which can be verified with the Euclidean algorithm.
+
+    In fact, we can use the Euclidean algorithm to find a way to express \(\gcd{(a, x)} = 1\) as a linear combination of \(a\) and \(m\), i.e.
+    %
+    \[1 = k_1 a + k_2 m\text{.}\]
+    %
+    Taking modulo \(m\) on both sides gives
+    %
+    \begin{align*}
+        k_1 a + k_2 m &= 1\tag{mod \(m\)}\\
+        k_1 a &= 1\tag{mod \(m\)}
+    \end{align*}
+    %
+    thus yielding the solution \(x = k_1\), which is the inverse of \(a\).
+\end{quote}
+
+For example, consider the multiplicative group of integers modulo 15:
+%
+\[G^{\times}_{15} = \{1, 2, 4, 7, 8, 11, 13, 14\}\text{.}\]
+%
+To find the inverse of \(13\) (i.e. \(13^{-1}\)) in this group, we must find a solution to the equation \(13\times x = 1 \pmod{15}\). This is done by computing the greatest common divisor between 13 and 15 by the Euclidean algorithm and then collecting the terms.
+
+\begin{tabular}{c|c}
+    \parbox{0.5\textwidth}{\centering
+        \textbf{Euclidean algorithm}
+        \begin{align*}
+            15 &= 1\times 13 + 2\\
+            13 &= 6 \times 2 + 1\\
+            2 &= 2 \times 1 + 0\\
+        \end{align*}
+    }
+    &
+    \parbox{0.5\textwidth}{\centering
+        \textbf{Collecting terms}
+        \begin{align*}
+            1 &= 13 - 6 \times 2\\
+            &= 13 - 6 \times (15 - 1 \times 13)\\
+            &= 13 - 6 \times 15 + 6 \times 13\\
+            &= 7 \times 13 - 6 \times 15
+        \end{align*}
+    }
+\end{tabular}
+
+We apply modulo 15 to both sides of the linear combination above, which gives
+%
+\begin{align*}
+    7 \times 13 - 6 \times 15 &= 1 \tag{mod 15}\\
+    7 \times 13 &= 1 \tag{mod 15}\\
+    13^{-1} &= 7\text{.} \tag{mod 15}
+\end{align*}
+
+
+Note that the equation \(a\times x = 1 \pmod{m}\) has a solution \(x = a^{-1}\) if and only if \(a\) and \(m\) are coprime, i.e. \(\gcd{(a, m)} = 1\).
+
+
+\subsection{Using inverses to solve problems for integers modulo \(m\)}
+
+\begin{itemize}
+    \item \textbf{Solving the equation \(a \times x = b \pmod{m}\).}
+
+    To solve this equation, we multiply both sides by \(a^{-1}\) to give \(x = a^{-1}\times b \pmod{m}\). We simply have to compute the inverse of \(a\) and multiply it by \(b\) modulo \(m\).
+
+    Since \(a^{-1}\) only exists when \(a\) and \(m\) are coprime, this equation has no solutions when \(\gcd{(a, m)} \neq 1\).
+
+    \item \textbf{Solving the equation \(x^a = b \pmod{m}\).}
+
+    To solve this equation, we exponentiate both sides to the power \(a^{-1}\), which produces
+    %
+    \begin{align*}
+        (x^a)^{a^{-1}} &= b^{a^{-1}} \tag{mod \(m\)}\\
+        x^{a \times a^{-1}} &= b^{a^{-1}} \tag{mod \(m\)}\\
+        x &= b^{a^{-1}}\tag{mod \(m\)}
+    \end{align*}
+    %
+    This means the value of \(x\) can be evaluated by raising \(b\) to the power of the inverse of \(a\). Again, this inverse (and hence the solution to this equation) only exists when \(a\) and \(m\) are coprime.
+\end{itemize}

@@ -1,0 +1,190 @@
+\section{Permutations}
+
+\subsection{What is a permutation?}
+
+A \textit{permutation} is an order in which a set of elements can be arranged. A permutation involving \(n\) elements is said to have \textit{degree} \(n\). In general, as we know from combinatorics, there are \(n!\) permutations of degree \(n\).
+
+For instance, the integers 1, 2 and 3 can be arranged in 6 different ways, each of which is considered a different permutation of degree 3.
+%
+\begin{center}
+    (1, 2, 3)\\
+    (1, 3, 2)\\
+    (2, 1, 3)\\
+    (2, 3, 1)\\
+    (3, 1, 2)\\
+    (3, 2, 1)
+\end{center}
+%
+We can denote each of these permutations using the following two-line notation.
+%
+\begin{alignat*}{5}
+&
+\begin{pmatrix}
+    1 & 2 & 3\\
+    1 & 2 & 3
+\end{pmatrix}
+&&\;\;&&
+\begin{pmatrix}
+    1 & 2 & 3\\
+    1 & 3 & 2
+\end{pmatrix}
+&&\;\;&&
+\begin{pmatrix}
+    1 & 2 & 3\\
+    2 & 1 & 3
+\end{pmatrix}
+\\&&&&&&&&&\\
+&
+\begin{pmatrix}
+    1 & 2 & 3\\
+    2 & 3 & 1
+\end{pmatrix}
+&&&&
+\begin{pmatrix}
+    1 & 2 & 3\\
+    3 & 1 & 2
+\end{pmatrix}
+&&&&
+\begin{pmatrix}
+    1 & 2 & 3\\
+    3 & 2 & 1
+\end{pmatrix}
+\end{alignat*}
+
+
+\subsection{Viewing permutations as bijections}
+
+Looking at the two-line notation, one might notice that any given permutation is merely a bijective function in disguise. For example, the permutation 
+%
+\[
+\begin{pmatrix}
+    1 & 2 & 3\\
+    3 & 1 & 2
+\end{pmatrix}
+\]
+%
+can be represented by a bijective function \(\sigma : \{1, 2, 3\} \rightarrow \{1, 2, 3\}\), where
+%
+\[
+\begin{cases}
+    \sigma(1) = 3\\
+    \sigma(2) = 1\\
+    \sigma(3) = 2\text{.}
+\end{cases}
+\]
+%
+In fact, we can define a permutation of degree \(n\) to be a bijection \(\sigma : \{1, 2, 3, \cdots, n\} \rightarrow \{1, 2, 3, \cdots, n\}\). We also define the \textit{symmetric group} of degree \(n\), denoted as \(S_n\), to be the set of all permutations of degree \(n\).
+
+For example, the symmetric group of degree 3 has the following elements.
+%
+\[
+S_3 = \left\{
+\begin{pmatrix}
+    1 & 2 & 3\\
+    1 & 2 & 3
+\end{pmatrix},
+%
+\begin{pmatrix}
+    1 & 2 & 3\\
+    1 & 3 & 2
+\end{pmatrix},
+%
+\begin{pmatrix}
+    1 & 2 & 3\\
+    2 & 1 & 3
+\end{pmatrix},
+%
+\begin{pmatrix}
+    1 & 2 & 3\\
+    2 & 3 & 1
+\end{pmatrix},
+%
+\begin{pmatrix}
+    1 & 2 & 3\\
+    3 & 1 & 2
+\end{pmatrix},
+%
+\begin{pmatrix}
+    1 & 2 & 3\\
+    3 & 2 & 1
+\end{pmatrix}
+\right\}
+\]
+
+Now, consider the permutation
+%
+\[\epsilon = \begin{pmatrix}
+    1 & 2 & 3\\
+    1 & 2 & 3
+\end{pmatrix}\text{.}\]
+%
+As the order of the elements is unchanged, this bijection is simply the identity function. Such a permutation, where \(\forall k \in \{1, 2, 3, \cdots, n\}, \epsilon(k) = k\), is called an \textit{identity permutation}.
+
+
+\subsection{Composition and order of permutations}
+
+Viewing permutations as bijections allows us to composite permutations in the same way that we composite functions. An example of this is displayed below.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}    
+        \node[align=center, anchor=south] at (-0.5, 0) {\(
+            \sigma =
+            \begin{pmatrix}
+                1 & 2 & 3\\
+                {\color{MidnightBlue} 3} & {\color{MidnightBlue} 1} &{\color{MidnightBlue} 2}
+            \end{pmatrix}
+        \)};
+
+        \draw[very thick, -latex, BrickRed] (0, 0) -- (0, -1) node[pos=0.5, anchor=west]{\(\sigma\)};
+
+        \node[align=center, anchor=north] at (0, -1) {\(
+            \begin{pmatrix}
+                {\color{MidnightBlue} 3} & {\color{MidnightBlue} 1} &{\color{MidnightBlue} 2}\\
+
+                {\color{Goldenrod4} 2} & {\color{Goldenrod4} 3} &{\color{Goldenrod4} 1}
+            \end{pmatrix}
+        \)};
+
+        \draw[very thick, -latex, BrickRed] (0, -2.5) -- (0, -3.5) node[pos=0.5, anchor=west]{\(\sigma\)};
+
+        \node[align=center, anchor=north] at (0, -3.5) {\(
+            \begin{pmatrix}
+                {\color{Goldenrod4} 2} & {\color{Goldenrod4} 3} &{\color{Goldenrod4} 1}\\
+
+                {\color{ForestGreen} 1} & {\color{ForestGreen} 2} &{\color{ForestGreen} 3}
+            \end{pmatrix}
+        \)};
+
+        \draw[pen colour={BrickRed}, decoration={calligraphic brace, amplitude=10pt, raise=30pt},decorate, ultra thick] (1,1.2) -- (1,-4.8) node[pos=0.5, anchor=west, BrickRed, align=left, shift={(1.5, 0)}] {Applying \(\sigma\) three times (i.e. \(\sigma^3\))\\ gives us the identity permutation \(\epsilon\),\\ so \(\sigma^3 = \epsilon\)};
+    \end{tikzpicture}
+    \caption{An example of compositing permutations.}
+    \label{fig:ch4-permutation-composition}
+\end{figure}
+
+
+We define the \textit{order} of a permutation \(\sigma\) to be the smallest positive integer \(k\) such that \(\sigma^k = \epsilon\), where \(\epsilon\) is the identity permutation. For example, in figure \ref{fig:ch4-permutation-composition}, applying \(\sigma\) three times takes us back to the start. This means that \(\sigma^3 = \epsilon\), the order of \(\sigma\) is 3.
+
+
+\subsection{Disorders, and the sign of a permutation}\label{sec:sign-of-permutation}
+
+For any given permutation \(\sigma\), a \textit{disorder} is a pair of values \((x, y)\) where \(x < y\) but \(\sigma(x) > \sigma(y)\).
+
+If a permutation has an even number of disorders, then it is said to have a sign of \(+1\). If the number of disorders is odd, then the permutation has a sign of \(-1\).
+
+For example, the permutation
+%
+\[
+\sigma =
+\begin{pmatrix}
+    1 & 2 & 3\\
+    3 & 1 & 2
+\end{pmatrix}
+\text{,}
+\]
+%
+has two disorders: \((3, 1)\) and \((3, 2)\). Therefore, its sign must be \(\sgn(\sigma) = +1\).
+
+Note that the sign of a permutation is defined in such a way that for any two permutations \(\sigma_1\) and \(\sigma_2\), we have
+%
+\[\sgn(\sigma_1 \sigma_2) = \sgn(\sigma_1) \cdot \sgn(\sigma_2)\text{.}\]

@@ -1,0 +1,124 @@
+\section{Lagrange's theorem and more on the properties of \(G^\times_m\)}
+
+At the end of the previous section, we provided a complete walkthrough of the RSA algorithm using actual, concrete numbers. In that walkthrough, we showed that Bob's message can be decrypted by computing the value of \(13^{27}\) modulo 55.
+
+This really goes without saying, but \(13^{27}\) is quite a big number, so how can computers perform 26 multiplications efficiently?
+
+The answer is: they don't. In fact, there are a couple of tricks that we can use to speed up performing modular arithmetic on large integer powers.
+
+In this section, we will illustrate these tricks with the following example problem:
+%
+\[7^{42} \text{ mod } 10 = \text{?}\]
+
+
+\subsection{Repetitive squaring}
+
+An obvious shortcut that we can take is repetitive squaring:
+%
+\begin{align*}
+    7^2 &= 49\\
+    7^4 &= 49^2 = 2401\\ 
+    7^8 &= 2401^2 = 5764801\\
+    7^{16} &= 5764801^2 = 33232930569601\\
+    7^{32} &= 33232930569601^2 = 1104427674243920646305299201\\
+    &\;\Downarrow\\
+    7^{42} &= 7^{32} \times 7^8 \times 7^2 \\
+    &= 1104427674243920646305299201 \times 5764801 \times 49\\
+    &= 311973482284542371301330321821976049\\
+    &= 9 \pmod{10}
+\end{align*}
+%
+This way, we've successfully reduced the number of multiplications from 41 to 7; but can we do better?
+
+
+\subsection{A better method}
+
+Compared to repetitive squaring, a more elegant method  would be to make use of the fact that we can perform multiplication on the set of remainders.
+
+We calculate the first few powers of \(7 \bmod{10}\), and discover that \(7^4 \bmod{10} = 1\).
+%
+\begin{alignat*}{3}
+    7^1 &&&= 7 \tag{mod 10}\\
+    7^2 &= 7 \times 7 = 49 &&= 9 \tag{mod 10}\\
+    7^3 &= 9 \times 7 = 63 &&= 3 \tag{mod 10}\\
+    7^4 &= 3 \times 7 = 21 &&= 1 \tag{mod 10}
+\end{alignat*}
+%
+This allows us to simplify our expression as follows:
+%
+\begin{align*}
+    7^{42} &= 7^{40} \times 7^2 \tag{mod 10}\\
+    &= (7^4)^{10} \times 9 \tag{mod 10}\\
+    &= 1^{10} \times 9 \tag{mod 10}\\
+    &= 9\tag{mod 10}
+\end{align*}
+%
+which results in the same answer we had before.
+
+Despite its effectiveness, this method has the drawback that its very first step --- multiplying 7 until we get \(1 \text{ mod } 10\) --- involves a lot of trial and error, and we never know how long it will take us to finally hit 1.
+
+To eliminate this issue, we will use a theorem known as Lagrange's theorem.
+
+
+\subsection{Lagrange's theorem}
+
+Lagrange's theorem states the following about groups and their (possibly but not necessarily cyclic) subgroups:
+%
+\begin{quote}
+    \textbf{Lagrange's theorem}
+
+    Any subgroup of a finite group must have an order that divides the order of the group.
+
+    In other words, if we have a group of order \(n\) which contains a subgroup of order \(k\), then \(n\) must be divisible by \(k\).
+\end{quote}
+%
+(The proof of this theorem is outside the scope of this course and therefore will not be included here.)
+
+To illustrate this theorem, consider the group formed by the set of remainders \(G_6 = \{0, 1, 2, 3, 4, 5\}\) with respect to addition modulo \(6\). One of its subgroups consists of the set \(H = \{0, 2, 4\}\). Notice that \(\abs{H} = 3\) is a factor of \(\abs{G_6} = 6\), so Lagrange's theorem checks out.
+
+
+\subsection{Applying Lagrange's theorem to cyclic subgroups of \(G^\times_m\)}
+
+But how does Lagrange's theorem help us compute \(7^{42} \bmod{10}\)?
+
+Let us generalize the problem to computing \(a^n \bmod{m}\). We will also throw in the assumption that \(a\) is coprime with \(m\).
+
+To do this, we consider the multiplicative group of integers of modulo \(m\), i.e. \((G^\times_m, \times)\). Since we assumed that \(a\) and \(m\) are coprime, we know that \(a \in G^\times_m\). We can then use \(a\) to generate a cyclic subgroup \((H, \times)\) as follows:
+%
+\[H = \{1, a, a^2, \cdots, a^{k-1}\}\]
+%
+where \(k\) is the order of the element \(a\). Note that:
+%
+\begin{itemize}
+    \item By definition of the order of an element (and of a cyclic subgroup), we have \(a^k = 1\).
+    \item The subgroup \((H, \times)\) is of order \(k\).
+    \item The group \((G^\times_m, \times)\) is of order \(\phi(m)\).
+\end{itemize}
+%
+Combining these three facts with Lagrange's theorem, we have:
+%
+\begin{align*}
+    a^{\phi(m)} &= a^{\abs{G^\times_m}}\\
+    &= a^{l \cdot \abs{H}} \tag{for some integer \(l\); by Lagrange's theorem}\\
+    &= a^{kl}\\
+    &= (a^{k})^l\\
+    &= 1^l\\
+    &= 1
+\end{align*}
+%
+This gives us the following result.
+%
+\begin{quote}
+    If \(\gcd{(a, m)} = 1\), then \(a^{\phi(m)} = a^{\abs{G^\times_m}} = 1 \pmod{m}\).
+\end{quote}
+%
+We can then use this result to calculate \(a^n \bmod{m}\). For instance, for \(7^{42} \bmod{10}\), we first note that 7 and 10 are coprime. Since \(\phi(10) = \abs{G^\times_{10}} = 4\), we have \(7^4 = 1 \pmod{m}\). Hence,
+%
+\begin{align*}
+    7^{42} &= 7^{40} \times 7^2 \tag{mod 10}\\
+    &= (7^4)^{10} \times 9 \tag{mod 10}\\
+    &= 1^{10} \times 9 \tag{mod 10}\\
+    &= 9\text{.} \tag{mod 10}
+\end{align*}
+%
+This is similar to the method we demonstrated a few subsections ago, except that the trial and error procedure is no longer needed.

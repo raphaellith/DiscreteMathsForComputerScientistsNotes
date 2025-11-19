@@ -1,0 +1,54 @@
+\section{Introduction to modular arithmetic}
+
+Consider the integer division \(100 \div 7\), which produces the quotient 14 and remainder 2 (because \(100 = 7 \times 14 + 2\)).
+
+Since this division produces the remainder 2, we say that 100 \textit{modulo} 7 is equal to 2. This is denoted as \(100 \bmod 7 = 2\). The divisor (which is 7 in this case) is known as the \textit{modulus}.
+
+Note the following facts about the modulo operator:
+%
+\begin{itemize}
+    \item For a given modulus \(m\), the remainder must be an integer inclusively between 0 and \(m - 1\). This gives us the set of remainders \(G_m = \{0, 1, 2, \cdots, m-2, m-1\}\).
+    
+    \item If two integers \(a\) and \(b\) differ by a multiple of \(m\), they must produce the same remainder when divided by \(m\). When this happens, we say that \(a\) and \(b\) are congruent modulo \(m\). This is denoted as \(a \equiv b \pmod m\).
+
+    \item We can perform addition and multiplication on the set of remainders. If \(a_1 = a_2 \pmod m\) and \(b_1  = b_2 \pmod m\), then:
+    \begin{align*}
+        a_1 + b_1 &= a_2 + b_2 \pmod m\\
+        a_2 \cdot b_2 &= a_2 \cdot b_2 \;\;\pmod m
+    \end{align*}
+    As an example, the addition and multiplication tables for the modulus 4 is shown below.
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|cccc|}
+            \hline
+            \(+ \pmod 4\) & 0 & 1 & 2 & 3\\
+            \hline
+            0 & 0 & 1 & 2 & 3\\
+            1 & 1 & 2 & 3 & 0\\
+            2 & 2 & 3 & 0 & 1\\
+            3 & 3 & 0 & 1 & 2\\
+            \hline
+        \end{tabular}
+        \caption{Addition on the set of remainders modulo 4.}
+        \label{tab:ch5-plus-mod4}
+    \end{table}
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|cccc|}
+            \hline
+            \(\times \pmod 4\) & 0 & 1 & 2 & 3\\
+            \hline
+            0 & 0 & 0 & 0 & 0\\
+            1 & 0 & 1 & 2 & 3\\
+            2 & 0 & 2 & 0 & 2\\
+            3 & 0 & 3 & 2 & 1\\
+            \hline
+        \end{tabular}
+        \caption{Multiplication on the set of remainders modulo 4.}
+        \label{tab:ch5-times-mod4}
+    \end{table}
+\end{itemize}
+
+We will talk more about modular arithmetic in the following chapters.

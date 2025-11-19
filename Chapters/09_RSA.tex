@@ -1,0 +1,160 @@
+\section{RSA cryptography}
+
+First published in 1977, the Rivest-Shamir-Adleman (RSA) algorithm is one of the oldest and most widely used encryption methods used to securely transmit messages over the internet through the use of private and public keys. Here, we will examine the reason behind RSA's popularity, how it works, and how it prevents eavesdropping from third parties.
+
+\subsection{Why?}
+
+To truly grasp the importance of RSA, we must first understand the problem that it's trying to solve in the first place.
+
+\begin{quote}
+    \textbf{The Problem: We Need Encryption}
+
+    Suppose Alice wants to send a private message to Bob via the internet. Doing this directly without any form of encryption is generally unsafe, which is why the late 1970s saw an increasing demand for secure data transmission that prevents sensitive information from being leaked or stolen by third-party eavesdroppers.
+\end{quote}
+
+And as it turns out, there has already been an available solution to this problem:
+
+\begin{quote}
+    \textbf{The Solution: Symmetric Key Cryptography}
+
+    A simple way to perform data encryption is to have Alice and Bob agree on some secret key, which is then used for both encryption and decryption. This type of cryptography, where the same key is used for both encryption and decryption, is known as \textit{symmetric key cryptography}. A lot of simple ciphers, like Caesar ciphers and substitution ciphers, are symmetric.
+\end{quote}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Images/Ch9/SymmetricEncryption.png}
+    \caption{Symmetric key cryptography uses the same secret key to encrypt and decrypt messages.}
+    \label{fig:Ch9-symmetric-key-cryptography}
+\end{figure}
+
+But this solution is certainly not without its challenges:
+
+\begin{quote}
+    \textbf{There's Another Issue: Key Distribution Problem}
+
+     Symmetric key cryptography sounds brilliant on paper, until you remember that you have to somehow generate a unique and secret key every time two parties want to talk to each other. There are a few problems with that:
+     %
+     \begin{itemize}
+         \item Prior to data transmission, Alice and Bob must agree on the same secret key. The obvious way to do that is for Alice to prepare a key in advance and then meet up with Bob and tell him what the key is. But how do you ensure that the key isn't stolen or copied by a third party at some point during that process?
+         
+         \item It goes without saying that there are tons of people on the internet. As the number of users (\(n\)) grows, the number of secret (and ideally unique) keys that we have to generate increases quadratically (\(C^n_2 = n(n+1)/2\)), which poses a logistical challenge.
+     \end{itemize}
+\end{quote}
+
+So... how do you solve that? This is where the RSA algorithm comes in. Unlike substitution ciphers, the RSA algorithm is assymmetric and uses two keys to encrypt and decrypt data:
+%
+\begin{itemize}
+    \item Each user has a \textit{public key} associated with themselves, and is accessible to anyone.
+    \item Each user also has a \textit{private key} which is known only to themselves.
+\end{itemize}
+%
+If Alice wants to send a message to Bob, she would have to use Bob's public key to encrypt the message. The message can only be decrypted with Bob's private key, which by definition is only available to Bob himself. This eliminates the possibility of any third-party eavesdropping.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Images/Ch9/PublicKeyEncryption.png}
+    \caption{An illustration of the public key encryption model.}
+    \label{fig:Ch9-public-key-encryption}
+\end{figure}
+
+
+\subsection{How?}
+
+So far, our description of the RSA algorithm is not very detailed, nor does it seem to involve any discrete mathematics whatsoever. However, as we will see below, the generation and use of private and public keys are very much based on modular arithmetic.
+
+
+\subsubsection{Generating the keys}
+
+Prior to data transmission, Bob, the recipient, should have already prepared a private key (kept only to himself) and a public key (distributed to everyone including the sender Alice).
+
+To do this, Bob comes up with two very large and secret primes \(p\) and \(q\), and he multiplies them to give the product \(n = pq\).
+
+Ideally, \(p\) and \(q\) should both be incredibly large primes, so large that it would be tremendously difficult to figure out their values given only the value of \(n\). This asymmetry, where it's easy to compute \(n\) given \(p\) and \(q\), but hard to compute \(p\) and \(q\) given \(n\), is what makes the RSA algorithm so powerful.
+
+In addition to the two primes, Bob also comes up with an integer \(e\) which is coprime with \(\phi(n) = \phi(pq) = (p-1)(q-1)\). Since \(\gcd{(e, \phi(n))} = 1\), there must exist an inverse \(e^{-1}\) for which
+%
+\[e \cdot e^{-1} = 1 \pmod{\phi(n)}\]
+
+The pair \((n, e)\) forms Bob's public key, which he distributes to everyone. The inverse \(e^{-1}\) is his private key.
+
+
+\subsubsection{Encryption and decryption}
+
+Suppose Alice wants to send a message \(M\) to Bob. She uses Bob's public key \((n, e)\) to encrypt \(M\) into an unintelligible form \(C\):
+%
+\[C = M^e\;\;\pmod{n}\]
+
+After Bob receives \(C\), he can use his private key \(e^{-1}\) to reconstruct \(M\) from \(C\):
+%
+\begin{align*}
+    C &= M^e \tag{mod \(n\)}\\
+    C^{e^{-1}} &= (M^e)^{e^{-1}} \tag{mod \(n\)}\\
+    C^{e^{-1}} &= M^{e \cdot e^{-1}} \tag{mod \(n\)}\\
+    M &= C^{e^{-1}} \tag{mod \(n\)}
+\end{align*}
+
+
+\subsubsection{What if someone tries to eavesdrop?}
+
+Let's say Eve wants to find out what Alice is saying to Bob, and manages to get her hands on the encrypted message \(C\).
+
+To work out what the unencrypted message \(M\) is, she would have to know what Bob's private key \(e^{-1}\) is. ``That's not too hard,'' Eve says, ``I know what what Bob's public key \((n, e)\) is.''
+
+Indeed, the fact that the public key \((n, e)\) is publicly available should in theory allow Eve to calculate the inverse \(e^{-1}\) by solving the equation
+%
+\[ex = 1 \pmod{\phi(n)}\text{.}\]
+%
+There's just one slight issue: It is extremely difficult for Eve to work out what \(\phi(n)\) is. Remember that \(n = pq\) is an outlandishly large number, and the only plausible way of calculating \(\phi(n)\) in polynomial time is to break \(n\) down into its prime factors \(p\) and \(q\), after which we can use the multiplicative property of Euler's totient function to compute \(\phi(n) = \phi(pq) = (p-1)(q-1)\). Without the prior knowledge of what \(p\) and \(q\) are, it is virtually impossible for Eve to work out the value of \(\phi(n)\), let alone \(e^{-1}\).
+
+
+\subsubsection{Wait, hang on a minute: What's mod \(\phi(n)\) doing there?}
+
+You may have noticed that during the generation of Bob's keys, the integer \(e\) is chosen such that it is coprime with \(\phi(n) = \phi(pq) = (p-1)(q-1)\). Using \(\phi(n)\) as the modulus, we compute the corresponding inverse \(e^{-1}\), which as Bob's private key is used to decrypt messages modulo \(n\).
+
+There are two moduli at play here: the modulus \(\phi(n)\) is used to choose the values of \(e\) and \(e^{-1}\), but the decryption process is all done modulo \(n\). This raises the question: Can't you just use \(\bmod{\;n}\) all the way through? Why do you have to introduce inconsistency?
+
+As it turns out, we can't just use \(\bmod{\;n}\) all the way through. Remember that Eve is always trying to eavesdrop --- she has access to Bob's public key \(n, e\), and she knows how to compute inverses. This makes it possible for Eve to easily work out Bob's private key \(e^{-1}\), thereby successfully decrypting his messages.
+
+But why specifically \(\phi(n) = (p-1)(q-1)\)? Why not some other function involving \(p\) and \(q\)? And why does \(e \cdot e^{-1} = 1\) still hold even after we switch moduli? Well, the answers to these questions would be an entire introductory course on number theory, so it's probably best to ignore them for now.
+
+
+\subsubsection{The RSA algorithm in action}
+
+Here we provide a concrete walkthrough of the RSA algorithm in its entirety. For the sake of simplicity, we'll be playing with relatively small numbers, although it is important to bear in mind that in the real world we typically use extremely large numbers for RSA cryptography.
+
+\begin{quote}
+    \textbf{RSA Algorithm: Complete Walkthrough}
+
+    Suppose Bob selects the primes \(p = 5\) and \(q = 11\). This gives us \(n = pq = 55\) and \(\phi(n) = (p-1)(q-1) = 4 \times 10 = 40\).
+
+    We want Bob to choose some integer \(e\) that's coprime with 40, so let's say he picks \(e = 3\).
+
+    We compute \(e^{-1} \pmod{40}\) using the Euclidean algorithm:
+    %
+    \begin{align*}
+        40 &= 13\times 3 + 1\\
+        3 &= 3\times 1 + 0\\
+        &\;\Updownarrow\\
+        1 &= 40 - 13\times 3\tag{mod 40}\\
+        1 &= -13\times 3\tag{mod 40}\\
+        3^{-1} &= -13 \tag{mod 40}\\
+        3^{-1} &= 27 \tag{mod 40}\\
+    \end{align*}
+    %
+    so Bob has the public key \((55, 3)\) and the private key 27.
+
+    Suppose Alice wants to send the message \(M = 7\) to Bob. She uses Bob's public key to encrypt the message like so:
+    %
+    \[C = M^3 = 7^3 = 343 = 13\text{.}\tag{mod 55}\]
+    %
+    After Bob receives the encrypted message \(C = 13\), he decrypts it with his private key 27:
+    %
+    \begin{align*}
+        M &= C^{27} \tag{mod 55}\\
+        &= 13^{27} \tag{mod 55}\\
+        &= 1192533292512492016559195008117 \tag{mod 55}\\
+        &= 7 \tag{mod 55}
+    \end{align*}
+    %
+    which allows him to read the original message \(M = 7\).
+\end{quote}

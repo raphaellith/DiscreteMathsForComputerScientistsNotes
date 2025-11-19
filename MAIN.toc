@@ -1,0 +1,88 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction to mathematical reasoning}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}What is a set?}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Conjunction, disjunction and negation}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}De Morgan's Laws: Negating conjunctions and disjunctions}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Implications and their negations}{6}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Contraposition}{7}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Equivalence}{8}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Quantifiers and their negations}{8}{subsection.1.7}%
+\contentsline {subsection}{\numberline {1.8}Proving and disproving mathematical propositions}{9}{subsection.1.8}%
+\contentsline {subsection}{\numberline {1.9}Free and bound variables}{10}{subsection.1.9}%
+\contentsline {section}{\numberline {2}Set theory}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Basic set notation}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Set operations}{11}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Set algebra}{13}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Similarities between sets, logic and arithmetic}{13}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Other miscellaneous laws}{14}{subsubsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.4}Proving two sets are equivalent}{14}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Constructing proofs with top-down and bottom-up approach}{15}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Functions}{16}{section.3}%
+\contentsline {subsection}{\numberline {3.1}What is a function?}{16}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Total and partial functions}{16}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Seqential composition of functions}{17}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Injections (encodings)}{18}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Surjections}{19}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Bijections (one-to-one correspondence)}{20}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Compositions of injections, surjections and bijections}{21}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Proving the associativity of sequential composition of injections}{22}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Comparing cardinalities of sets}{22}{subsection.3.9}%
+\contentsline {section}{\numberline {4}Permutations}{25}{section.4}%
+\contentsline {subsection}{\numberline {4.1}What is a permutation?}{25}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Viewing permutations as bijections}{25}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Composition and order of permutations}{26}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Disorders, and the sign of a permutation}{26}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Introduction to modular arithmetic}{27}{section.5}%
+\contentsline {section}{\numberline {6}Binary relations}{28}{section.6}%
+\contentsline {subsection}{\numberline {6.1}What is a binary relation?}{28}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Equivalence relations}{28}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Equivalence classes}{28}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Introduction to groups}{30}{section.7}%
+\contentsline {subsection}{\numberline {7.1}What is a group?}{30}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Commutative groups}{30}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Additive groups}{30}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Multiplicative groups}{32}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Subgroups}{33}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Order of an element}{33}{subsection.7.6}%
+\contentsline {section}{\numberline {8}Euclidean algorithm and its applications in groups}{34}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Multiplicative group of integers modulo \(m\)}{34}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Euler's totient function}{34}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}But is it really a group?}{35}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Euclidean algorithm}{35}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Expressing \(\gcd {(a, b)}\) as a linear combination of \(a\) and \(b\)}{36}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Proving invertibility for multiplicative group of integers modulo \(n\)}{37}{subsection.8.6}%
+\contentsline {subsection}{\numberline {8.7}Using inverses to solve problems for integers modulo \(m\)}{38}{subsection.8.7}%
+\contentsline {section}{\numberline {9}RSA cryptography}{39}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Why?}{39}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}How?}{40}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}Generating the keys}{40}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Encryption and decryption}{41}{subsubsection.9.2.2}%
+\contentsline {subsubsection}{\numberline {9.2.3}What if someone tries to eavesdrop?}{41}{subsubsection.9.2.3}%
+\contentsline {subsubsection}{\numberline {9.2.4}Wait, hang on a minute: What's mod \(\phi (n)\) doing there?}{42}{subsubsection.9.2.4}%
+\contentsline {subsubsection}{\numberline {9.2.5}The RSA algorithm in action}{42}{subsubsection.9.2.5}%
+\contentsline {section}{\numberline {10}Lagrange's theorem and more on the properties of \(G^\times _m\)}{44}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Repetitive squaring}{44}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}A better method}{44}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Lagrange's theorem}{45}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Applying Lagrange's theorem to cyclic subgroups of \(G^\times _m\)}{45}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Linear algebra}{47}{section.11}%
+\contentsline {subsection}{\numberline {11.1}What are matrices and what can we do with them?}{47}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Determinants and how to compute them}{48}{subsection.11.2}%
+\contentsline {subsubsection}{\numberline {11.2.1}Determinant of a \(2 \times 2\) matrix}{48}{subsubsection.11.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.2}Determinant of a \(3 \times 3\) matrix}{49}{subsubsection.11.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.3}Determinant of a \(4 \times 4\) matrix}{49}{subsubsection.11.2.3}%
+\contentsline {subsubsection}{\numberline {11.2.4}Leibniz formula for determinants}{50}{subsubsection.11.2.4}%
+\contentsline {subsubsection}{\numberline {11.2.5}The determinant as the volume of a parallelopiped}{50}{subsubsection.11.2.5}%
+\contentsline {subsubsection}{\numberline {11.2.6}Recursive method using upper triangular matrices}{51}{subsubsection.11.2.6}%
+\contentsline {subsection}{\numberline {11.3}Inverses and how to compute them}{52}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Solving systems of linear equations}{53}{subsection.11.4}%
+\contentsline {subsubsection}{\numberline {11.4.1}Using Cramer's rule}{53}{subsubsection.11.4.1}%
+\contentsline {subsubsection}{\numberline {11.4.2}Using inverses}{55}{subsubsection.11.4.2}%
+\contentsline {subsubsection}{\numberline {11.4.3}Gaussian elimination}{56}{subsubsection.11.4.3}%
+\contentsline {subsection}{\numberline {11.5}Eigenvectors and eigenvalues}{57}{subsection.11.5}%
+\contentsline {subsubsection}{\numberline {11.5.1}What are eigenvectors and eigenvalues?}{57}{subsubsection.11.5.1}%
+\contentsline {subsubsection}{\numberline {11.5.2}Example: A matrix with no eigenvalues}{60}{subsubsection.11.5.2}%
+\contentsline {subsubsection}{\numberline {11.5.3}Example: A matrix with one eigenvalue}{60}{subsubsection.11.5.3}%
+\contentsline {subsubsection}{\numberline {11.5.4}Example: A matrix with multiple eigenvalues}{61}{subsubsection.11.5.4}%
+\contentsline {subsubsection}{\numberline {11.5.5}The product of all eigenvalues of a matrix equals its determinant}{62}{subsubsection.11.5.5}%
+\contentsline {section}{\numberline {12}How to count}{66}{section.12}%

@@ -1,0 +1,305 @@
+\section{Set theory}
+
+In the previous section, we defined a set as a collection of elements. In this section, we will examine how sets interact with each other, and how their interactions are governed by various laws and properties.
+
+
+\subsection{Basic set notation}
+
+We can define a set using set-builder notation. For example, if we want to define \(A\) as the set of all real numbers \(x\) where \(x^2 = x\), we can use any of the two definitions shown below:
+%
+\begin{align*}
+    A &= \{x \setvert x \text{ is a real number s.t. } x^2 = x\}\\
+    A &= \{x : x^2 = x\}
+\end{align*}
+
+Consider the sets \(X = \{2, 4\}\) and \(Y = \{1, 2, 3, 4, 5\}\). Notice that for every element in \(X\), that element also appears in \(Y\), i.e.
+%
+\[\forall x,\; x \in X \implies x \in Y\text{.}\]
+%
+When this happens, we say that \(X\) is a subset of \(Y\), denoted as \(X \subseteq Y\).
+
+The \textit{cardinality} of a set \(S\) refers to the number of elements in it, and is denoted as \(\abs{S}\). A set that contains no elements is known as an \textit{empty set} and is denoted as \(\emptyset\). Contrarily, a set that contains all possible elements is known as the \textit{universal set} and is denoted as \(U\).
+
+For any set \(S\), the power set \(P(S)\) is the set of all subsets of \(S\). If \(S\) has \(n\) elements, then \(P(S)\) will have \(2^n\) elements. For example, if \(S = \{0, 1\}\), then \(P(S) = \{\emptyset, \{0\}, \{1\}, \{0, 1\}\}\).
+
+
+\subsection{Set operations}
+
+We introduce the following set operations.
+
+\begin{enumerate}\setlength\itemsep{1.5em}
+    \item\termnotationdef{Union}{\(A \cup B = \{x \setvert (x \in A) \lor (x \in B)\}\)}{The union of two sets \(A\) and \(B\) refers to the set of all elements that are found in either \(A\) or \(B\).}
+
+    \item\termnotationdef{Intersection}{\(A \cap B = \{x \setvert (x \in A) \land (x \in B)\}\)}{The intersection of two sets \(A\) and \(B\) refers to the set of all elements that are found in both \(A\) and \(B\).}
+
+    \item\termnotationdef{Difference}{\(A \backslash B = \{x \setvert (x \in A) \land (x \notin B)\}\)}{The difference between two sets \(A\) and \(B\), or ``\(A\) minus \(B\)'', refers to the set of all elements that are found in \(A\) but not \(B\). Note that \(A \backslash B\) is different from \(B \backslash A\).}
+
+    \item\termnotationdef{Symmetric difference}{\(A \Delta B = (A \backslash B) \cup (B \backslash A) = (A \cup B) \backslash (A \cap B)\)}{The symmetric difference between two sets \(A\) and \(B\) refers to the set of all elements that are found in either \(A\) or \(B\), but not both.}
+
+     \item\termnotationdef{Complement}{\(A^c = U \backslash A\)}{The complement of a set \(A\) refers to the set of all elements that are not found in \(A\).}
+
+     \item\termnotationdef{Cartesian product}{\(A \times B = \{(a, b) \setvert (a \in A) \land (b \in B)\}\)}{The Cartesian product of two sets \(A\) and \(B\) refers to the set of all ordered pairs \((a, b)\) where \(a\) is an element of \(A\) and \(b\) is an element of \(B\).}
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Images/Ch2/SetNotation.jpg}
+    \caption{From left to right, top to bottom: Venn diagram representations of \(A\cup B\), \(A \cap B\), \(A \backslash B\), \(A \Delta B\) and \(A^c\), along with a representation of the Cartesian product \(A \times B\) using the Cartesian coordinate system.}
+    \label{fig:Ch2-set-notation-visualization}
+\end{figure}
+
+When expressing the union or intersection of a large number of sets, we can use the following shorthand:
+%
+\begin{align*}
+    \bigcup\limits_{m \in M} A_m &= A_{m_1} \cup A_{m_2} \cup A_{m_3} \cup \cdots \cup A_{m_n}\\
+    \bigcap\limits_{m \in M} A_m &= A_{m_1} \cap A_{m_2} \cap A_{m_3} \cap \cdots \cap A_{m_n}
+\end{align*}
+%
+where \(M = \{m_1, m_2, m_3, \cdots m_n\}\).
+
+
+
+
+
+\subsection{Set algebra}
+
+\subsubsection{Similarities between sets, logic and arithmetic}
+
+Set algebra concerns properties of sets and set operations. Before we delve into these properties though, let us first acknowledge the following fact:
+%
+\begin{quote}
+    The way the set operations \(A \cup B\) and \(A \cap B\) behave is very similar to that of the logical operations \(A \lor B\) and \(A \land B\), and also that of the arithmetic operations \(A+B\) and \(A\cdot B\).
+\end{quote}
+
+This is expressed more concisely with in table \ref{tab:Ch2-mirroring-behavior-set-logical-arithmetic}. 
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c||c|c|}
+        \hline
+        \textbf{Set operations} & \(A \cup B\) & \(A \cap B\)\\
+        \hline
+        \textbf{Logical operations} & \(A \lor B\) & \(A \land B\)\\
+        \hline
+        \textbf{Arithmetic operations} & \(A+B\) & \(A\cdot B\)\\
+        \hline
+    \end{tabular}
+    \caption{The behaviours of these operations mirror one another almost identically.}
+    \label{tab:Ch2-mirroring-behavior-set-logical-arithmetic}
+\end{table}
+
+To illustrate this fact, table \ref{tab:Ch2-laws-set-logical-arithmetic} introduces a number of laws in set algebra and compares them to their counterparts in mathematical logic and arithmetic. For each of the four laws, note the structural similarities in regard to how the law is applied in sets, in logic and in arithmetic.
+
+\begin{table}[H]
+    \scriptsize
+    \centering
+    \begin{tabular}{|p{0.1\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|}
+       
+        \hline
+        
+        & \makecell{\textbf{In sets}\\ (\(\cup,\; \cap\))}
+        & \makecell{\textbf{In logic}\\ (\(\lor,\; \land\))}
+        & \makecell{\textbf{In arithmetic}\\ (\(+,\; \cdot\))}
+        \\
+        
+        \hline
+        
+        \textbf{Commutative}
+        & {\makecell{\(\begin{aligned}
+            A \cup B &= B \cup A\\
+            A \cap B &= B \cap A
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            A \lor B &= B \lor A\\
+            A \land B &= B \land A
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            A + B &= B + A\\
+            A \cdot B &= B \cdot A
+        \end{aligned}\)}}
+        \\
+        
+        \hline
+        
+        \textbf{Associative}
+        & {\makecell{\(\begin{aligned}
+            A \cup (B \cup C) &= (A \cup B) \cup C\\
+            A \cap (B \cap C) &= (A \cap B) \cap C\\
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            A \lor (B \lor C) &= (A \lor B) \lor C\\
+            A \land (B \land C) &= (A \land B) \land C\\
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            A + (B + C) &= (A + B) + C\\
+            A \cdot (B \cdot C) &= (A \cdot B) \cdot C
+        \end{aligned}\)}}
+        \\
+
+        \hline
+
+        \textbf{Distributive}
+        & {\makecell{\(\begin{aligned}
+            A \cap (B \cup C) &= (A \cap B) \cup (A \cap C)\\
+            A \cup (B \cap C) &= (A \cup B) \cap (A \cup C)\\
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            A \land (B \lor C) &= (A \land B) \lor (A \land C)\\
+            A \lor (B \land C) &= (A \lor B) \land (A \lor C)\\
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            A \cdot (B + C) &= A \cdot B + A \cdot C \\
+            &\text{N/A}
+        \end{aligned}\)}}
+        \\
+
+        \hline
+
+        \textbf{Identity}
+        & {\makecell{\(\begin{aligned}
+            A \cup \emptyset &= A\\
+            A \cap \emptyset &= \emptyset\\
+            A \cup U &= U\\
+            A \cap U &= A
+        \end{aligned}\)}}
+        & {\makecell{N/A}}
+        & {\makecell{\(\begin{aligned}
+            A + 0 &= A\\
+            A \cdot 0 &= 0\\
+            &\text{N/A}\\
+            A \cdot 1 &= 1
+        \end{aligned}\)}}
+        \\
+
+        \hline
+
+        \textbf{Double complement}
+        & {\makecell{\((A^c)^c = A\)}}
+        & {\makecell{\(\neg(\neg A) = A\)}}
+        & {\makecell{N/A}}
+        \\
+
+        \hline
+
+        \textbf{De Morgan's}
+        & {\makecell{\(\begin{aligned}
+            (A \cup B)^c &= A^c \cap B^c\\
+            (A \cap B)^c &= A^c \cup B^c
+        \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+            \neg(A \lor B) &= \neg A \land \neg B\\
+            \neg(A \land B) &= \neg A \lor \neg B
+        \end{aligned}\)}}
+        & {\makecell{N/A}}
+        \\
+
+        \hline
+
+        \textbf{Absorption}
+        & {\makecell{\(\begin{aligned}
+        A \cup (A \cap B) &= A\\
+        A \cap (A \cup B) &= A
+    \end{aligned}\)}}
+        & {\makecell{\(\begin{aligned}
+        A \lor (A \land B) &= A\\
+        A \land (A \lor B) &= A
+    \end{aligned}\)}}
+        & {\makecell{N/A}}
+        \\
+
+        \hline
+        
+    \end{tabular}
+    \caption{Applying commutative, associative, distributive, identity, double complement, De Morgan's and absorption laws to set algebra, mathematical logic and basic arithmetic.}
+    \label{tab:Ch2-laws-set-logical-arithmetic}
+\end{table}
+
+
+\subsubsection{Other miscellaneous laws}
+
+Apart from the laws listed above, we will also introduce a few miscellaneous laws in set algebra.
+
+\begin{enumerate}\setlength\itemsep{1.5em}
+    \item \termdesc{Idempotent Laws\footnote{The word ``idempotent'' comes from the Latin root ``idem'' meaning ``same'' and the word ``potent'' which means ``having great power''. As a whole, the word literally translates to ``having the same effect''.}}{\(\begin{aligned}
+        A \cup A &= A\\
+        A \cap A &= A
+    \end{aligned}\)}
+
+    \item \termdesc{General De Morgan's Laws\footnote{This is equivalent to the De Morgan's Laws introduced in table \ref{tab:Ch2-laws-set-logical-arithmetic}, which can be obtained by setting \(C\) to the universal set \(U\).}}{\(\begin{aligned}
+        C \backslash (A \cup B) &= (C \backslash A) \cap (C \backslash B)\\
+        C \backslash (A \cap B) &= (C \backslash A) \cup (C \backslash B)
+    \end{aligned}\)}
+
+    \item \termdesc{De Morgan's Laws for an Arbitrary Number of Sets}{\(\begin{aligned}
+        \left(\bigcup\limits_{n \in N} A_n \right)^c &= \bigcap\limits_{n \in N} A^c_n\\
+        \left(\bigcap\limits_{n \in N} A_n \right)^c &= \bigcup\limits_{n \in N} A^c_n
+    \end{aligned}\)}
+
+    \item \termdesc{Alternative definition of difference}{\(A \backslash B = A \cap B^c\)}
+
+    \item \termdesc{Contraposition}{\(\begin{aligned}
+        (A \subseteq B) &\text{ iff } (B^c \subseteq A^c)\\
+        (A = B) &\text{ iff } (A^c = B^c)
+    \end{aligned}\)}
+\end{enumerate}
+
+
+\subsection{Proving two sets are equivalent}
+
+Consider the two sets defined below.
+%
+\begin{align*}
+    A &= \{x : x^2 = x\}\\
+    B &= \{1, 0\}
+\end{align*}
+%
+Intuitively, these two sets should be equivalent, as they contain the same two elements. However, to mathematically prove the equivalence between the sets, we must be able to demonstrate that:
+%
+\begin{enumerate}
+    \item \(A\) is a subset of \(B\), i.e. \(A \subseteq B\); and
+    \item \(B\) is a subset of \(A\), i.e. \(B \subseteq A\).
+\end{enumerate}
+%
+These statements must each be proven individually, as shown below.
+%
+\begin{align*}
+    x &\in A \implies x^2 = x \implies (x = 0) \lor (x = 1) \implies x \in B \tag{proof for statement 1}\\
+    y &\in B \implies (x = 0) \lor (x = 1) \implies y^2 = y \implies y \in A\tag{proof for statement 2}
+\end{align*}
+
+
+\subsection{Constructing proofs with top-down and bottom-up approach}
+
+In general, proofs in set algebra can be constructed using the ``top-down then bottom-up'' approach:
+%
+\begin{enumerate}
+    \item \textbf{Top-down:} Starting from one side of the equation, reduce that side to the primitive facts.
+    \item \textbf{Bottom-up:} Afterwards, combine those primitive facts to reach the other side of the equation.
+\end{enumerate}
+
+\vspace{2em}
+
+\begin{mdframed}[linewidth=1pt]
+\noindent \textbf{Example}
+
+Prove that \(A \backslash B = A \backslash (A \cap B)\).
+
+\begin{proof}
+    We break the equation down into two separate statements. The first statement is equivalent to \(\text{LHS} \subseteq \text{RHS}\) while the second one is equivalent to \(\text{RHS} \subseteq \text{LHS}\).
+
+    \begin{enumerate}
+        \item \(\forall x,\; (x \in \text{LHS}) \implies (x \in \text{RHS})\)
+        \item \(\forall y,\; (y \in \text{RHS}) \implies (y \in \text{LHS})\)
+    \end{enumerate}
+
+    To prove the first statement, note that if \(x \in \text{LHS} = A \backslash B\), then \(x \in A \land x \notin B\) \textit{(top-down)}. Since \(x \notin B\), we have \(x \notin A \cap B\). Recalling that \(x \in A\), we conclude that \(x \in A \backslash (A \cap B) = \text{RHS}\) \textit{(bottom-up)}.
+
+    To prove the second statement, not that if \(y \in \text{RHS} = A \backslash (A \cap B)\), then \(y \in A \land y \notin A \cap B\). This means that \(y \notin B\) \textit{(top-down)}. Since \(y \in A \land y \notin B\), we have \(y \in A\backslash B\) \textit{(bottom-up)}, concluding the proof.
+\end{proof}
+
+\end{mdframed}
+
+
+
+
+

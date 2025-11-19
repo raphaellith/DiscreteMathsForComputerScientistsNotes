@@ -1,0 +1,122 @@
+\documentclass[12pt, usenames, dvipsnames, x11names]{article}
+\usepackage[english]{babel}
+
+\usepackage[usenames, dvipsnames, x11names]{xcolor}
+
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb, gensymb}
+\usepackage{graphicx}
+\usepackage{svg}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage[hidelinks]{hyperref}
+
+\usepackage{mathptmx}  % Times New Roman
+% \usepackage{bookman}  % Bookman
+% \usepackage{fourier}  % Fourier
+% \usepackage{tgpagella}  % TeX Gyre Pagella
+
+
+\usepackage{fancyvrb}
+
+
+
+\usepackage[skip=10pt plus1pt, indent=0pt]{parskip}
+
+\usepackage[]{mdframed}  % For boxed text
+
+\usepackage[thinlines, thicklines]{easytable}
+
+\usepackage{float}
+
+\usepackage{makecell}
+
+\usepackage{tikz, pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, calligraphy}
+\usetikzlibrary{calc}
+
+\usepackage{ifthen}
+
+\usepackage{enumitem}
+
+% ------------------------------------------------------
+
+\title{\textbf{COMP0147: Discrete Mathematics for Computer Scientists}}
+\author{Raphael Li}
+\date{\textit{Year 1 (2024--25), Term 1}}
+
+% ------------------------------------------------------
+
+\newcommand{\setvert}{\;\vert\;}
+
+\newcommand{\TruthTableTrue}{\textbf{\color{ForestGreen} TRUE}}
+\newcommand{\TruthTableFalse}{\textbf{\color{BrickRed} FALSE}}
+
+\newcommand{\termnotationdef}[3]{
+\textbf{#1}
+
+#2
+
+\textit{#3}
+}
+
+\newcommand{\termdesc}[2]{
+\textbf{#1}
+
+#2
+}
+
+\newcommand{\abs}[1]{\vert #1 \vert}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+% ------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+% \begin{mdframed}[linewidth=1pt]
+% \noindent This is a first-year course for Computer Science, introducing students to material they will need in future computer science courses and providing basic tools for problem solving.
+% \end{mdframed}
+
+\newpage
+\tableofcontents
+
+\newpage
+\input{Chapters/01_Reasoning}
+
+\newpage
+\input{Chapters/02_Set theory}
+
+\newpage
+\input{Chapters/03_Functions}
+
+\newpage
+\input{Chapters/04_Permutations}
+
+\newpage
+\input{Chapters/05_Modular Arithmetic}
+
+\newpage
+\input{Chapters/06_Binary Relations}
+
+\newpage
+\input{Chapters/07_Groups}
+
+\newpage
+\input{Chapters/08_EuclideanAlgorithm}
+
+\newpage
+\input{Chapters/09_RSA}
+
+\newpage
+\input{Chapters/10_LagrangesThm}
+
+\newpage
+\input{Chapters/11_LinearAlgebra}
+
+\newpage
+\input{Chapters/12_HowToCount}
+
+\end{document}
